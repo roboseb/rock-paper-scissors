@@ -9,10 +9,17 @@ function computerPlay() {
 //Plays a round of roshambo taking player input,
 //and returns a string declaring the winner.
 function playRound(playerSelection, computerSelection) {
+    console.log("*************************************");  
+    console.log(playerSelection);      
     console.log(`Com has chosen ${computerSelection}!`)
+    comChoiceInfo.innerText = `Com has chosen ${computerSelection}!`;
 
     //change player input to lower case
     playerSelection = playerSelection.toLowerCase();
+
+    if (playerWins === 5 || comWins === 5) {
+        return;
+    }
 
     //Tests to find a winner of roshambo.
     if (playerSelection != computerSelection) {
@@ -40,22 +47,41 @@ function playRound(playerSelection, computerSelection) {
     } else {
         return "It's a tie! You both chose the same!";
     }
-}
 
-//Plays 5 rounds of roshambo.
-function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound(prompt("Choose your tool!"), computerPlay()));
-        console.log(`Player has ${playerWins} wins.`);
-        console.log(`Computer has ${comWins} wins.`);
-
-    }
 
 }
+
+const buttons = document.querySelectorAll('button');
+let playerSelection;
+let gameInfo = document.querySelector("#gameInfo");
+let playerInfo = document.querySelector('#playerScore');
+let computerInfo = document.querySelector('#computerScore');
+let comChoiceInfo = document.querySelector("#comChoice");
+
 
 let playerWins = 0;
 let comWins = 0;
 
-game();
+buttons.forEach(button => {
+    button.addEventListener('click' , () => {
+
+        playerSelection = button.id;
+        gameInfo.textContent = playRound(playerSelection, computerPlay());
+
+        playerInfo.textContent = `Player Score: ${playerWins}`;
+        computerInfo.textContent = `Computer Score: ${comWins}`;
+        if (playerWins === 5) {
+            gameInfo.textContent = "That is it! The human has won!";
+        } else if (comWins === 5) {
+            gameInfo.textContent = "This is the end! Computer has vanquished their foe!";
+        }
+    });
+
+});
+
+
+
+
+
 
 
