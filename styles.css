@@ -10,3 +10,20 @@ button {
     height: 75px;
 
 }
+
+#character {
+    width:400px;
+    height:auto;
+    margin-top: 50px;
+}
+
+@keyframes bounce {
+    0% {margin-top: 50px; margin-bottom: 0px;}
+    60% {margin-top: 0px; margin-bottom: 50px;}
+    100% {margin-top: 50px; margin-bottom: 0px;}
+}
+
+.bounce {
+    animation-name: bounce;
+    animation-duration: 1s;
+}

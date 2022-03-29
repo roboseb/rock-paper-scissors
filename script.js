@@ -14,6 +14,9 @@ function playRound(playerSelection, computerSelection) {
     console.log(`Com has chosen ${computerSelection}!`)
     comChoiceInfo.innerText = `Com has chosen ${computerSelection}!`;
 
+    
+
+
     //change player input to lower case
     playerSelection = playerSelection.toLowerCase();
 
@@ -58,15 +61,35 @@ let playerInfo = document.querySelector('#playerScore');
 let computerInfo = document.querySelector('#computerScore');
 let comChoiceInfo = document.querySelector("#comChoice");
 
+const character = document.getElementById("character");
+console.log(character);
+
+
+
 
 let playerWins = 0;
 let comWins = 0;
+let comCurrentWins;
 
 buttons.forEach(button => {
+    
+    if (button.id === "bounce") {
+        return;
+    }
+
     button.addEventListener('click' , () => {
 
+        comCurrentWins = comWins;
         playerSelection = button.id;
         gameInfo.textContent = playRound(playerSelection, computerPlay());
+
+        
+
+        if (comWins > comCurrentWins) {
+            character.src = "images/alaiss sad.png";
+        } else {
+            character.src = "images/alaiss happy.png";
+        }
 
         playerInfo.textContent = `Player Score: ${playerWins}`;
         computerInfo.textContent = `Computer Score: ${comWins}`;
@@ -76,6 +99,17 @@ buttons.forEach(button => {
             gameInfo.textContent = "This is the end! Computer has vanquished their foe!";
         }
     });
+
+});
+
+const bounceButton = document.getElementById('bounce');
+
+bounceButton.addEventListener('click' , ()  => {
+    console.log(character.className);
+    character.classList.remove('bounce');
+    character.classList.toggle('bounce');        
+
+   
 
 });
 
