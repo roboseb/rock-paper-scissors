@@ -86,9 +86,9 @@ buttons.forEach(button => {
         
 
         if (comWins > comCurrentWins) {
-            character.src = "images/alaiss sad.png";
+            terrify();
         } else {
-            character.src = "images/alaiss happy.png";
+            bounce();
         }
 
         playerInfo.textContent = `Player Score: ${playerWins}`;
@@ -103,15 +103,29 @@ buttons.forEach(button => {
 });
 
 const bounceButton = document.getElementById('bounce');
+bounceButton.addEventListener('click' , bounce);
 
-bounceButton.addEventListener('click' , ()  => {
-    console.log(character.className);
-    character.classList.remove('bounce');
-    character.classList.toggle('bounce');        
+const terrifyButton = document.getElementById('terrify');
+terrifyButton.addEventListener('click', terrify);
 
-   
+function bounce() {
+    character.src = "images/alaiss happy.png"
+    character.classList.remove('bounce', 'terrify');
+    void character.offsetWidth;
+    character.classList.add('bounce');    
+}
 
-});
+function terrify() {
+    for (let i = 0; i < 3; i++) {
+        character.src = "images/alaiss sad.png"
+        character.classList.remove('terrify', 'bounce');
+        void character.offsetWidth;
+        character.classList.add('terrify'); 
+    }   
+}
+
+
+
 
 
 
